@@ -8,6 +8,7 @@ using TasksDone.Infrastructure.Persistance;
 using System.Reactive.Linq;
 using DynamicData;
 using DynamicData.Binding;
+using System.Threading.Tasks;
 
 namespace TasksDone.UI.ViewModels;
 
@@ -73,7 +74,6 @@ public class MainWindowViewModel : ReactiveObject
     {
         AddProjectCommand = ReactiveCommand.Create(AddProject);
         AddTaskCommand = ReactiveCommand.Create(AddTask);
-
         Projects = new ObservableCollection<TeamProject>(_repo.GetAllProjects());
     }
 
@@ -93,14 +93,15 @@ public class MainWindowViewModel : ReactiveObject
         }
     }
 
-    private void AddTask()
+    private async void AddTask()
     {
         if (SelectedProject == null || string.IsNullOrWhiteSpace(NewTaskTitle)) return;
 
         var task = new TaskItem(NewTaskTitle, new System.Guid());
+        await _repo.AddTask(SelectedProject.Id, task);
         SelectedProject.AddTask(task);
 
-        Tasks.Add(task); // синхронно добавляем в UI
+        Tasks.Add(task); 
         NewTaskTitle = string.Empty;
     }
 

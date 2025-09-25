@@ -33,7 +33,8 @@
 		</TabItem>
 
 		<!-- Tasks tab-->
-		<TabItem Header="Tasks">
+		<TabItem IsVisible="{Binding SelectedProject, Converter={x:Static ObjectConverters.IsNotNull}}" 
+				 Header="{Binding SelectedProject.ProjectName} ">
 			<StackPanel Margin="10">
 				<StackPanel Orientation="Horizontal" Margin="0,0,0,10">
 					<TextBox Width="300" Text="{Binding NewTaskTitle, UpdateSourceTrigger=PropertyChanged}" />
@@ -54,10 +55,10 @@
 				</ListBox>
 			</StackPanel>
 		</TabItem>
-		
-		<!-- Users tab-->
+
+		<!--
+		 Users tab
 		<TabItem Header="Users">
-			<!--
 			<StackPanel Margin="10">
 				<StackPanel Orientation="Horizontal" Margin="0,0,0,10">
 					<TextBox Width="300" Text="{Binding NewTaskTitle, UpdateSourceTrigger=PropertyChanged}" />
@@ -76,7 +77,8 @@
 						</DataTemplate>
 					</ListBox.ItemTemplate>
 				</ListBox>
-			</StackPanel>-->
+			</StackPanel>
 		</TabItem>
+		-->
 	</TabControl>
 </Window>

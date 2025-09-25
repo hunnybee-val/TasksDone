@@ -452,3 +452,6 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+/TasksDone/tasksdone.db-wal
+/TasksDone/tasksdone.db-shm
+/TasksDone/tasksdone.db
