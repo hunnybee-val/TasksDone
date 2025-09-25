@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using TasksDone.Domain.Entities;
 using TasksDone.Domain.Enums;
 using TasksDone.Domain.Interfaces;
-using TasksDone.Infrastructure.Persistence;
+using TasksDone.Infrastructure.Persistance;
 
 namespace TasksDone.Infrastructure.Repositories;
 

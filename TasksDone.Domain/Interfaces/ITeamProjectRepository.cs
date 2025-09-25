@@ -11,30 +11,34 @@ public interface ITeamProjectRepository
     /// <summary>
     /// Adds new project.
     /// </summary>
-    Task AddAsync(TeamProject project, CancellationToken cancellationToken = default);
+    Task AddProject(TeamProject project, CancellationToken cancellationToken = default);
+    /// <summary>
+    /// Adds new task to a project.
+    /// </summary>
+    Task AddTask(Guid projectId, TaskItem task, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a project by ID.
     /// </summary>
-    Task<TeamProject?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<TeamProject?> GetProjectById(Guid id, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets all projects.
     /// </summary>
-    Task<List<TeamProject>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<List<TeamProject>> GetAllProjects(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets projects with unfinished tasks.
     /// </summary>
-    Task<List<TeamProject>> GetActiveProjectsAsync(CancellationToken cancellationToken = default);
+    Task<List<TeamProject>> GetActiveProjects(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Updates project's name or description.
     /// </summary>
-    Task UpdateAsync(TeamProject project, CancellationToken cancellationToken = default);
+    Task UpdateProject(TeamProject project, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a project  .
     /// </summary>
-    Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
+    Task DeleteProject(Guid id, CancellationToken cancellationToken = default);
 }

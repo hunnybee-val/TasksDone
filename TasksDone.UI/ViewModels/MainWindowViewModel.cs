@@ -1,7 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Reactive;
 using ReactiveUI;
 using TasksDone.Domain.Entities;
+using TasksDone.Infrastructure.Repositories;
+using TasksDone.Infrastructure.Persistance;
 
 namespace TasksDone.UI.ViewModels;
 
@@ -23,6 +26,7 @@ public class MainWindowViewModel : ReactiveObject
     }
 
     public ObservableCollection<TeamProject> Projects { get; } = new();
+    private readonly TeamProjectRepository _repo = new(new AppDbContext());
 
     public TeamProject? SelectedProject
     {
@@ -72,11 +76,12 @@ public class MainWindowViewModel : ReactiveObject
 
     #region Methods
 
-    private void AddProject()
+    private async void AddProject()
     {
         if (!string.IsNullOrWhiteSpace(NewProjectName))
         {
-            var project = new TeamProject(NewProjectName, new System.Guid());
+            var project = new TeamProject(NewProjectName, Guid.NewGuid());
+            await _repo.AddProject(project);
             Projects.Add(project);
             SelectedProject = project;
             NewProjectName = string.Empty;

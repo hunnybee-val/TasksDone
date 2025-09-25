@@ -1,22 +1,25 @@
-﻿using System.Collections.Generic;
-using System.Reflection.Emit;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TasksDone.Domain.Entities;
 
-namespace TasksDone.Infrastructure.Persistence;
+namespace TasksDone.Infrastructure.Persistance;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<TaskItem> Tasks => Set<TaskItem>();
-    public DbSet<TeamProject> Projects => Set<TeamProject>();
+    public DbSet<TeamProject> Projects { get; set; }
+    public DbSet<TaskItem> Tasks { get; set; }
 
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlite("Data Source=tasksdone.db");
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TeamProject>()
             .HasMany(p => p.Tasks)
-            .WithOne() 
+            .WithOne()
             .OnDelete(DeleteBehavior.Cascade);
+
+        base.OnModelCreating(modelBuilder);
     }
 }

@@ -40,6 +40,7 @@ namespace TasksDone.Domain.Entities
 
         #region Public Constructors
 
+        public TaskItem() { } //EF Consctructor
         public TaskItem(string title, Guid projectId)
         {
             Id = Guid.NewGuid();

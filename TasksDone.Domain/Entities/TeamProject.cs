@@ -30,14 +30,18 @@ namespace TasksDone.Domain.Entities
         #endregion Public Properties
 
         #region Public Constructors
+
+        public TeamProject() { } //EF Constructor
+
         public TeamProject(string projectTitle, Guid projectId, bool isPrivate = false, string description = "")
         {
             Id = Guid.NewGuid();
-            ProjectName = projectTitle ?? throw new ArgumentNullException(nameof(projectTitle));
+            ProjectName = projectTitle ?? "NewProject";
             IsPrivateUseOnly = isPrivate;
             TasksCount = 0;
             Description = description;
         }
+
 
         #endregion Public Constructors
 

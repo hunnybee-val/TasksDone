@@ -45,6 +45,7 @@ namespace TasksDone.Domain.Entities
 
         #region Public Constructors
 
+        public User() { }  //EF constructor
         public User(string username, string email, string passwordHash, UserRole role = UserRole.Guest)
         {
             Id = Guid.NewGuid();
