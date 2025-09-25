@@ -4,17 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TasksDone.Domain.Enums;
+using ReactiveUI;
 
 namespace TasksDone.Domain.Entities
 {
     /// <summary>
     /// Base class for tasks.
     /// </summary>
-    public class TaskItem
+    public class TaskItem : ReactiveObject
     {
+        #region Fields
+
+        private string _title;
+        private TaskProgressStatus _status;
+
+        #endregion Fields
         public Guid Id { get; private set; }
-        public string Title { get; private set; }
-        public TaskProgressStatus Status { get; private set; }
+        public string Title
+        {
+            get => _title;
+            private set => this.RaiseAndSetIfChanged(ref _title, value);
+        }
+
+        public TaskProgressStatus Status
+        {
+            get => _status;
+            private set => this.RaiseAndSetIfChanged(ref _status, value);
+        }
         public Guid ProjectId { get; private set; }
 
         public TaskItem(string title, Guid projectId)

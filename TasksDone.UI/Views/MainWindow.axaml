@@ -1,12 +1,82 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:TasksDone.UI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:TasksDone.UI.Views"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d"
+		RequestedThemeVariant="Dark"
+		xmlns:vm="clr-namespace:TasksDone.UI.ViewModels"
+		xmlns:en="clr-namespace:TasksDone.Domain.Entities;assembly=TasksDone.Domain"
+		x:DataType="vm:MainWindowViewModel"
         x:Class="TasksDone.UI.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="TasksDone">
-        <views:MainView />
+        Width="800" Height="500"
+		CanResize="False"
+        Title="✅TasksDone">
+
+	<TabControl>
+		<!-- Projects tab -->
+		<TabItem Header="Projects">
+			<StackPanel Margin="10">
+				<StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+					<TextBox Width="300" Text="{Binding NewProjectName, UpdateSourceTrigger=PropertyChanged}" />
+					<Button Content="Add Project" Command="{Binding AddProjectCommand}" Margin="5,0,0,0"/>
+				</StackPanel>
+
+				<ListBox ItemsSource="{Binding Projects}" SelectedItem="{Binding SelectedProject}">
+					<ListBox.ItemTemplate>
+						<DataTemplate
+							DataType="en:TeamProject">
+							<TextBlock Text="{Binding ProjectName}" />
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</StackPanel>
+		</TabItem>
+
+		<!-- Tasks tab-->
+		<TabItem Header="Tasks">
+			<StackPanel Margin="10">
+				<StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+					<TextBox Width="300" Text="{Binding NewTaskTitle, UpdateSourceTrigger=PropertyChanged}" />
+					<Button Content="Add Task" Command="{Binding AddTaskCommand}" Margin="5,0,0,0"
+                            IsEnabled="{Binding SelectedProject, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+				</StackPanel>
+
+				<ListBox ItemsSource="{Binding Tasks}">
+					<ListBox.ItemTemplate>
+						<DataTemplate
+							DataType="en:TaskItem">
+							<StackPanel Orientation="Horizontal">
+								<CheckBox IsChecked="True" />
+								<TextBlock Text="{Binding Title}" Margin="5,0,0,0"/>
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</StackPanel>
+		</TabItem>
+		
+		<!-- Users tab-->
+		<TabItem Header="Users">
+			<!--
+			<StackPanel Margin="10">
+				<StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+					<TextBox Width="300" Text="{Binding NewTaskTitle, UpdateSourceTrigger=PropertyChanged}" />
+					<Button Content="Add Task" Command="{Binding AddTaskCommand}" Margin="5,0,0,0"
+                            IsEnabled="{Binding SelectedProject, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+				</StackPanel>
+
+				<ListBox ItemsSource="{Binding Tasks}">
+					<ListBox.ItemTemplate>
+						<DataTemplate
+							DataType="en:TaskItem">
+							<StackPanel Orientation="Horizontal">
+								<CheckBox IsChecked="True" />
+								<TextBlock Text="{Binding Title}" Margin="5,0,0,0"/>
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</StackPanel>-->
+		</TabItem>
+	</TabControl>
 </Window>
