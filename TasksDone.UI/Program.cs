@@ -3,7 +3,7 @@
 using Avalonia;
 using Avalonia.ReactiveUI;
 
-namespace TasksDone;
+namespace TasksDone.UI;
 
 class Program
 {
