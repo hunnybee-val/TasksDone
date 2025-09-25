@@ -8,6 +8,10 @@ using TasksDone.Domain.Entities;
 using TasksDone.Domain.Enums;
 using TasksDone.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
+using DynamicData;
+using System.Reactive.Linq;
+using DynamicData.Binding;
 
 namespace TasksDone.Infrastructure.Repositories
 {
@@ -20,6 +24,8 @@ namespace TasksDone.Infrastructure.Repositories
         {
             _db = db;
         }
+
+        public List<TeamProject> GetAllProjects() => _db.Projects.ToList();
 
         public async Task AddProject(TeamProject project, CancellationToken cancellationToken = default)
         {

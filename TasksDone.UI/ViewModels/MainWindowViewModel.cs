@@ -5,6 +5,9 @@ using ReactiveUI;
 using TasksDone.Domain.Entities;
 using TasksDone.Infrastructure.Repositories;
 using TasksDone.Infrastructure.Persistance;
+using System.Reactive.Linq;
+using DynamicData;
+using DynamicData.Binding;
 
 namespace TasksDone.UI.ViewModels;
 
@@ -25,7 +28,7 @@ public class MainWindowViewModel : ReactiveObject
         set => this.RaiseAndSetIfChanged(ref _newProjectName, value);
     }
 
-    public ObservableCollection<TeamProject> Projects { get; } = new();
+    public ObservableCollection<TeamProject> Projects { get; }
     private readonly TeamProjectRepository _repo = new(new AppDbContext());
 
     public TeamProject? SelectedProject
@@ -70,6 +73,8 @@ public class MainWindowViewModel : ReactiveObject
     {
         AddProjectCommand = ReactiveCommand.Create(AddProject);
         AddTaskCommand = ReactiveCommand.Create(AddTask);
+
+        Projects = new ObservableCollection<TeamProject>(_repo.GetAllProjects());
     }
 
     #endregion Public Constructors
