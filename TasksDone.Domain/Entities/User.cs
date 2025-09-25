@@ -9,6 +9,7 @@ namespace TasksDone.Domain.Entities
 {
     public class User
     {
+        #region Public Properties
         /// <summary>
         /// User's ID
         /// </summary>
@@ -40,6 +41,9 @@ namespace TasksDone.Domain.Entities
         private readonly List<TaskItem> _tasks = new();
         public IReadOnlyCollection<TaskItem> Tasks => _tasks.AsReadOnly();
 
+        #endregion Public Properties
+
+        #region Public Constructors
 
         public User(string username, string email, string passwordHash, UserRole role = UserRole.Guest)
         {
@@ -49,6 +53,10 @@ namespace TasksDone.Domain.Entities
             PasswordHash = passwordHash ?? throw new ArgumentNullException(nameof(passwordHash));
             Role = role;
         }
+
+        #endregion Public Constructors
+
+        #region Methods
 
         public void ChangeEmail(string newEmail)
         {
@@ -70,5 +78,7 @@ namespace TasksDone.Domain.Entities
                 throw new ArgumentNullException(nameof(task));
             _tasks.Add(task);
         }
+
+        #endregion Methods
     }
 }

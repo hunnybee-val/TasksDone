@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="ReactiveUI" Version="20.1.1" />
+  </ItemGroup>
+
 </Project>

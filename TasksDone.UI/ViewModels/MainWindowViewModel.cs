@@ -7,10 +7,15 @@ namespace TasksDone.UI.ViewModels;
 
 public class MainWindowViewModel : ReactiveObject
 {
-    // Projects
+    //Projects
+    #region Private Fields
+
     private string _newProjectName = string.Empty;
     private TeamProject? _selectedProject;
 
+    #endregion Private Fields
+
+    #region Public Properties
     public string NewProjectName
     {
         get => _newProjectName;
@@ -31,8 +36,17 @@ public class MainWindowViewModel : ReactiveObject
 
     public ReactiveCommand<Unit, Unit> AddProjectCommand { get; }
 
-    // Tasks
+    #endregion Public Properties
+
+    //Tasks
+    #region Private Fields
+
     private string _newTaskTitle = string.Empty;
+
+    #endregion Private Fields
+
+    #region Public Properties
+
     public string NewTaskTitle
     {
         get => _newTaskTitle;
@@ -43,11 +57,20 @@ public class MainWindowViewModel : ReactiveObject
 
     public ReactiveCommand<Unit, Unit> AddTaskCommand { get; }
 
+    #endregion Public Properties
+
+
+    #region Public Constructors
+
     public MainWindowViewModel()
     {
         AddProjectCommand = ReactiveCommand.Create(AddProject);
         AddTaskCommand = ReactiveCommand.Create(AddTask);
     }
+
+    #endregion Public Constructors
+
+    #region Methods
 
     private void AddProject()
     {
@@ -80,4 +103,6 @@ public class MainWindowViewModel : ReactiveObject
                 Tasks.Add(t);
         }
     }
+
+    #endregion Methods
 }

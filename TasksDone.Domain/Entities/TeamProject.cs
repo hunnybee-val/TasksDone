@@ -13,6 +13,8 @@ namespace TasksDone.Domain.Entities
     /// </summary>
     public class TeamProject
     {
+        #region Public Properties
+
         public Guid Id { get; private set; }
         public string ProjectName { get; private set; }
         /// <summary>
@@ -25,6 +27,9 @@ namespace TasksDone.Domain.Entities
         private readonly List<TaskItem> _tasks = new();
         public IReadOnlyCollection<TaskItem> Tasks => _tasks.AsReadOnly();
 
+        #endregion Public Properties
+
+        #region Public Constructors
         public TeamProject(string projectTitle, Guid projectId, bool isPrivate = false, string description = "")
         {
             Id = Guid.NewGuid();
@@ -33,6 +38,10 @@ namespace TasksDone.Domain.Entities
             TasksCount = 0;
             Description = description;
         }
+
+        #endregion Public Constructors
+
+        #region Methods
 
         public void AddTask(TaskItem task)
         {
@@ -50,5 +59,7 @@ namespace TasksDone.Domain.Entities
         {
             Description = newDescription ?? string.Empty;
         }
+
+        #endregion Methods
     }
 }

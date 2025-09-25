@@ -19,6 +19,9 @@ namespace TasksDone.Domain.Entities
         private TaskProgressStatus _status;
 
         #endregion Fields
+
+        #region Public Properties
+
         public Guid Id { get; private set; }
         public string Title
         {
@@ -33,6 +36,10 @@ namespace TasksDone.Domain.Entities
         }
         public Guid ProjectId { get; private set; }
 
+        #endregion Public Properties
+
+        #region Public Constructors
+
         public TaskItem(string title, Guid projectId)
         {
             Id = Guid.NewGuid();
@@ -40,6 +47,10 @@ namespace TasksDone.Domain.Entities
             ProjectId = projectId;
             Status = TaskProgressStatus.New;
         }
+
+        #endregion Public Constructors
+
+        #region Methods
 
         public void Start()
         {
@@ -54,6 +65,8 @@ namespace TasksDone.Domain.Entities
                 throw new InvalidOperationException("Task must be InProgress to complete.");
             Status = TaskProgressStatus.Done;
         }
+
+        #endregion Methods
     }
 
 }
